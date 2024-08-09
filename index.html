@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Джо Хакер - Программист Матрицы</title>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @keyframes neon {
+            0%, 100% { text-shadow: 0 0 5px #2AABEE, 0 0 10px #2AABEE, 0 0 15px #2AABEE, 0 0 20px #0088CC, 0 0 30px #0088CC, 0 0 40px #0088CC, 0 0 55px #0088CC; }
+            50% { text-shadow: 0 0 10px #2AABEE, 0 0 20px #2AABEE, 0 0 30px #2AABEE, 0 0 40px #0088CC, 0 0 50px #0088CC, 0 0 75px #0088CC, 0 0 100px #0088CC; }
+        }
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: radial-gradient(circle, #2AABEE, #000000);
+            color: #ffffff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: auto; /* Изменено с hidden на auto для прокрутки */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 1s ease-out;
+            flex-direction: column; /* Для вертикального выравнивания */
+        }
+        .content {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            animation: fadeIn 1.5s ease-out;
+        }
+        h1 {
+            font-size: 36px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            color: #2AABEE;
+            animation: neon 2s infinite;
+        }
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+            line-height: 1.6;
+            color: #2AABEE;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+        p:nth-child(2) { animation-delay: 0.5s; }
+        p:nth-child(3) { animation-delay: 1s; }
+        p:nth-child(4) { animation-delay: 1.5s; }
+        p:nth-child(5) { animation-delay: 2s; }
+        p:nth-child(6) { animation-delay: 2.5s; }
+        p:nth-child(7) { animation-delay: 3s; }
+        .button {
+            display: inline-block;
+            background-color: #2AABEE;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+            letter-spacing: 1px;
+            animation: pulse 1.5s infinite;
+        }
+        .button:hover {
+            background-color: #0088CC;
+            transform: scale(1.05);
+        }
+        .matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: black;
+            opacity: 0.5;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+        }
+        .contact-form {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 400px;
+            margin-top: 20px;
+            animation: fadeIn 2s ease-out;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .contact-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #2AABEE;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .contact-form button:hover {
+            background-color: #0088CC;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix"></div>
+    <div class="content">
+        <h1>Джо Хакер</h1>
+        <p>ПРОГРАММИСТ, СПЕЦИАЛИЗИРУЮЩИЙСЯ НА РАЗРАБОТКЕ СКРИПТОВ И БОТОВ В ТЕЛЕГРАМЕ.</p>
+        <p>СВЯЗАТЬСЯ С ДЖО: <a class="button" href="https://t.me/joe_hacker">ТЕЛЕГРАМ</a></p>
+        <p>КАНАЛ ДЖО С НОВОСТЯМИ МИРА ХАКИНГА: <a class="button" href="https://t.me/joe_hacker_canal">КАНАЛ В ТЕЛЕГРАМЕ</a></p>
+        <p>ЗАКАЖИТЕ УСЛУГУ У ДЖО: <a class="button" href="https://kwork.ru/user/joehacker">KWORK</a></p>
+        <p>ИНСТРУКЦИИ ПО ПРОМПТ ИНЖЕНЕРИИ: <a class="button" href="https://proglib.io/sh/JHR3QLw5Ys">ПРОМПТ ИНЖЕНЕРИЯ</a></p>
+        <p>РЕГИСТРАЦИЯ АККАУНТА CHAT GPT ИЗ РОССИИ: <a class="button" href="https://habr.com/ru/articles/755896/">CHAT GPT НА ХАБРЕ</a></p>
+
+        <div class="contact-form">
+            <h2>Обратная связь</h2>
+            <input type="text" id="name" placeholder="Ваше имя" required>
+            <textarea id="message" placeholder="Ваш вопрос" required></textarea>
+            <button onclick="sendMessage()">Отправить</button>
+        </div>
+    </div>
+
+    <script>
+        // Matrix Effect
+        const canvas = document.createElement('canvas');
+        document.querySelector('.matrix').appendChild(canvas);
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const letters = Array(256).join(1).split('');
+        let fontSize = 16;
+
+        const draw = () => {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#2AABEE';
+            letters.map((y_pos, index) => {
+                const text = String.fromCharCode(3e4 + Math.random() * 33);
+                const x_pos = index * fontSize;
+                ctx.fillText(text, x_pos, y_pos);
+                letters[index] = y_pos > canvas.height + Math.random() * 1e4 ? 0 : y_pos + fontSize;
+            });
+        };
+        setInterval(draw, 50);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Send message to Telegram
+        function sendMessage() {
+            const name = document.getElementById('name').value;
+            const message = document.getElementById('message').value;
+            const chat_id = '5371541339'; // Используйте ваш chat ID
+            const token = '6894665692:AAFoy-R0LAnRxQhxpQPwblJCBlwNcPf-IkA'; // Используйте ваш токен бота
+
+            if (name && message) {
+                const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=Имя: ${name}%0AВопрос: ${message}`;
+
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.ok) {
+                            alert('Сообщение отправлено!');
+                            document.getElementById('name').value = '';
+                            document.getElementById('message').value = '';
+                        } else {
+                            alert('Ошибка отправки сообщения!');
+                        }
+                    })
+                    .catch(error => {
+                        alert('Ошибка отправки сообщения!');
+                        console.error('Error:', error);
+                    });
+            } else {
+                alert('Пожалуйста, заполните все поля.');
+            }
+        }
+    </script>
+</body>
+</html>
