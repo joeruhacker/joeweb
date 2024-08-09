@@ -90,38 +90,6 @@
         canvas {
             display: block;
         }
-        .contact-form {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            width: 100%;
-            max-width: 400px;
-            margin-top: 20px;
-            animation: fadeIn 2s ease-out;
-        }
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        .contact-form button {
-            width: 100%;
-            padding: 10px;
-            background-color: #2AABEE;
-            color: #ffffff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        .contact-form button:hover {
-            background-color: #0088CC;
-            transform: scale(1.05);
-        }
     </style>
 </head>
 <body>
@@ -134,13 +102,7 @@
         <p>ЗАКАЖИТЕ УСЛУГУ У ДЖО: <a class="button" href="https://kwork.ru/user/joehacker">KWORK</a></p>
         <p>ИНСТРУКЦИИ ПО ПРОМПТ ИНЖЕНЕРИИ: <a class="button" href="https://proglib.io/sh/JHR3QLw5Ys">ПРОМПТ ИНЖЕНЕРИЯ</a></p>
         <p>РЕГИСТРАЦИЯ АККАУНТА CHAT GPT ИЗ РОССИИ: <a class="button" href="https://habr.com/ru/articles/755896/">CHAT GPT НА ХАБРЕ</a></p>
-
-        <div class="contact-form">
-            <h2>Обратная связь</h2>
-            <input type="text" id="name" placeholder="Ваше имя" required>
-            <textarea id="message" placeholder="Ваш вопрос" required></textarea>
-            <button onclick="sendMessage()">Отправить</button>
-        </div>
+        <p>ПОСМОТРЕТЬ КОД ДЖО НА GITHUB: <a class="button" href="https://github.com/joeruhacker">GITHUB ДЖО</a></p>
     </div>
 
     <script>
@@ -172,36 +134,6 @@
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         });
-
-        // Send message to Telegram
-        function sendMessage() {
-            const name = document.getElementById('name').value;
-            const message = document.getElementById('message').value;
-            const chat_id = '5371541339'; // Используйте ваш chat ID
-            const token = '6894665692:AAFoy-R0LAnRxQhxpQPwblJCBlwNcPf-IkA'; // Используйте ваш токен бота
-
-            if (name && message) {
-                const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=Имя: ${name}%0AВопрос: ${message}`;
-
-                fetch(url)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.ok) {
-                            alert('Сообщение отправлено!');
-                            document.getElementById('name').value = '';
-                            document.getElementById('message').value = '';
-                        } else {
-                            alert('Ошибка отправки сообщения!');
-                        }
-                    })
-                    .catch(error => {
-                        alert('Ошибка отправки сообщения!');
-                        console.error('Error:', error);
-                    });
-            } else {
-                alert('Пожалуйста, заполните все поля.');
-            }
-        }
     </script>
 </body>
 </html>
