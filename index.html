@@ -52,19 +52,16 @@
             color: #2AABEE;
             animation: fadeIn 1s forwards;
         }
-        p:nth-child(2) { animation-delay: 0.5s; }
-        p:nth-child(3) { animation-delay: 1s; }
-        p:nth-child(4) { animation-delay: 1.5s; }
-        p:nth-child(5) { animation-delay: 2s; }
-        p:nth-child(6) { animation-delay: 2.5s; }
-        p:nth-child(7) { animation-delay: 3s; }
+        .button-wrapper {
+            margin-bottom: 20px;
+        }
         .button {
             display: inline-block;
             background-color: #2AABEE;
             color: #ffffff;
             text-decoration: none;
             padding: 10px 20px;
-            margin: 10px 0;
+            margin-top: 10px;
             border-radius: 5px;
             transition: background-color 0.3s, transform 0.3s;
             letter-spacing: 1px;
@@ -94,13 +91,36 @@
     <div class="matrix"></div>
     <div class="content">
         <h1>Джо Хакер</h1>
-        <p>ПРОГРАММИСТ, СПЕЦИАЛИЗИРУЮЩИЙСЯ НА РАЗРАБОТКЕ СКРИПТОВ И БОТОВ В ТЕЛЕГРАМЕ.</p>
-        <p><a class="button" href="https://t.me/joe_hacker">СВЯЗАТЬСЯ В ТЕЛЕГРАМЕ</a></p>
-        <p><a class="button" href="https://t.me/joe_hacker_canal">КАНАЛ В ТЕЛЕГРАМЕ</a></p>
-        <p><a class="button" href="https://kwork.ru/user/joehacker">ЗАКАЗАТЬ УСЛУГУ НА KWORK</a></p>
-        <p><a class="button" href="https://proglib.io/sh/JHR3QLw5Ys">ИНСТРУКЦИИ ПО ПРОМПТ ИНЖЕНЕРИИ</a></p>
-        <p><a class="button" href="https://habr.com/ru/articles/755896/">РЕГИСТРАЦИЯ CHAT GPT НА ХАБРЕ</a></p>
-        <p><a class="button" href="https://github.com/joeruhacker">ПОСМОТРЕТЬ КОД НА GITHUB</a></p>
+        
+        <div class="button-wrapper">
+            <p>Связаться с Джо:</p>
+            <a class="button" href="https://t.me/joe_hacker">ТЕЛЕГРАМ</a>
+        </div>
+
+        <div class="button-wrapper">
+            <p>Канал Джо с новостями мира хакинга:</p>
+            <a class="button" href="https://t.me/joe_hacker_canal">КАНАЛ В ТЕЛЕГРАМЕ</a>
+        </div>
+
+        <div class="button-wrapper">
+            <p>Закажите услугу у Джо:</p>
+            <a class="button" href="https://kwork.ru/user/joehacker">KWORK</a>
+        </div>
+
+        <div class="button-wrapper">
+            <p>Инструкции по промпт инженерии:</p>
+            <a class="button" href="https://proglib.io/sh/JHR3QLw5Ys">ПРОМПТ ИНЖЕНЕРИЯ</a>
+        </div>
+
+        <div class="button-wrapper">
+            <p>Регистрация аккаунта Chat GPT из России:</p>
+            <a class="button" href="https://habr.com/ru/articles/755896/">CHAT GPT НА ХАБРЕ</a>
+        </div>
+
+        <div class="button-wrapper">
+            <p>Посмотреть код Джо на GitHub:</p>
+            <a class="button" href="https://github.com/joeruhacker">GITHUB ДЖО</a>
+        </div>
     </div>
 
     <script>
