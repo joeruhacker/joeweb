@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Джо Хакер - Программист Матрицы</title>
+    <!-- Подключение шрифта Roboto Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -18,7 +20,7 @@
             50% { text-shadow: 0 0 10px #2AABEE, 0 0 20px #2AABEE, 0 0 30px #2AABEE, 0 0 40px #0088CC, 0 0 50px #0088CC, 0 0 75px #0088CC, 0 0 100px #0088CC; }
         }
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-family: 'Roboto Mono', monospace; /* Применение Roboto Mono ко всему телу */
             background: radial-gradient(circle, #2AABEE, #000000);
             color: #ffffff;
             margin: 0;
@@ -40,6 +42,7 @@
             z-index: 1; /* Обеспечивает, что контент выше анимации */
         }
         h1 {
+            font-family: 'Roboto Mono', monospace; /* Применение Roboto Mono */
             font-size: 48px;
             text-transform: uppercase;
             letter-spacing: 4px;
@@ -47,10 +50,11 @@
             color: #2AABEE;
             animation: neon 2s infinite;
         }
-        p {
-            font-size: 20px;
-            margin: 10px 0;
-            line-height: 1.6;
+        p.heading {
+            font-family: 'Roboto Mono', monospace; /* Применение Roboto Mono */
+            font-size: 18px; /* Уменьшенный размер шрифта */
+            margin: 20px 0 10px 0;
+            line-height: 1.4;
             color: #2AABEE;
             animation: fadeIn 1s forwards;
         }
@@ -58,17 +62,19 @@
             margin-bottom: 20px;
         }
         .button {
+            font-family: 'Roboto Mono', monospace; /* Применение Roboto Mono */
             display: inline-block;
             background-color: #2AABEE;
             color: #ffffff;
             text-decoration: none;
-            padding: 12px 24px;
+            padding: 10px 20px;
             margin-top: 10px;
             border-radius: 5px;
             transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
             letter-spacing: 1px;
             animation: pulse 1.5s infinite;
             box-shadow: 0 0 10px #2AABEE, 0 0 20px #2AABEE, 0 0 30px #2AABEE;
+            font-size: 14px; /* Уменьшенный размер шрифта */
         }
         .button:hover {
             background-color: #0088CC;
@@ -97,23 +103,23 @@
         <h1>Джо Хакер</h1>
         
         <div class="button-wrapper">
-            <p>Связаться с Джо:</p>
-            <a class="button" href="https://t.me/joe_hacker" target="_blank">ТЕЛЕГРАМ</a>
+            <p class="heading">Связаться с Джо:</p>
+            <a class="button" href="https://t.me/joe_hacker">ТЕЛЕГРАМ</a>
         </div>
 
         <div class="button-wrapper">
-            <p>Канал Джо с новостями мира хакинга:</p>
-            <a class="button" href="https://t.me/joe_hacker_canal" target="_blank">КАНАЛ В ТЕЛЕГРАМЕ</a>
+            <p class="heading">Канал Джо с новостями мира хакинга:</p>
+            <a class="button" href="https://t.me/joe_hacker_canal">КАНАЛ В ТЕЛЕГРАМЕ</a>
         </div>
 
         <div class="button-wrapper">
-            <p>Закажите услугу у Джо:</p>
-            <a class="button" href="https://kwork.ru/user/joehacker" target="_blank">KWORK</a>
+            <p class="heading">Закажите услугу у Джо:</p>
+            <a class="button" href="https://kwork.ru/user/joehacker">KWORK</a>
         </div>
-
+        
         <div class="button-wrapper">
-            <p>Посмотреть код Джо на GitHub:</p>
-            <a class="button" href="https://github.com/joeruhacker" target="_blank">GITHUB ДЖО</a>
+            <p class="heading">Посмотреть код Джо на GitHub:</p>
+            <a class="button" href="https://github.com/joeruhacker">GITHUB ДЖО</a>
         </div>
     </div>
 
@@ -188,7 +194,7 @@
                 ctx.fillText(text, x, y);
 
                 // Обновление позиции
-                if (y > height && Math.random() > 0.975) {
+                if (y > height && Math.random() > 0.999) { // Уменьшена скорость сброса
                     drops[i] = 0;
                 } else {
                     drops[i]++;
