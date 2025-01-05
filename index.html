@@ -43,13 +43,14 @@
             color: #ffffff;
             margin: 0;
             padding: 0;
-            height: 100vh;
+            min-height: 100vh; /* Используем min-height вместо height */
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             animation: fadeIn 1s ease-out;
-            overflow: hidden; /* Предотвращает появление полос прокрутки из-за анимации */
+            overflow-y: auto; /* Разрешаем вертикальную прокрутку */
+            /* overflow: hidden; */ /* Удалено для предотвращения скрытия контента */
         }
         .content {
             text-align: center;
