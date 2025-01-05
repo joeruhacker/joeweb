@@ -50,7 +50,7 @@
             flex-direction: column;
             animation: fadeIn 1s ease-out;
             overflow-y: auto; /* Разрешаем вертикальную прокрутку */
-            position: relative; /* Для позиционирования кнопки "Назад" */
+            /* overflow: hidden; */ /* Удалено для предотвращения скрытия контента */
         }
         .content {
             text-align: center;
@@ -114,48 +114,6 @@
         canvas {
             display: block;
         }
-        /* Стили для кнопки "Назад" */
-        .back-button {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background-color: #2AABEE;
-            color: #ffffff;
-            border: none;
-            border-radius: 5px;
-            padding: 8px 12px;
-            font-size: 14px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 0 10px #2AABEE, 0 0 20px #2AABEE, 0 0 30px #2AABEE;
-            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-            z-index: 2; /* Поверх iframe */
-            display: none; /* Скрыта по умолчанию */
-        }
-        .back-button:hover {
-            background-color: #0088CC;
-            transform: scale(1.05);
-            box-shadow: 0 0 20px #0088CC, 0 0 30px #0088CC, 0 0 40px #0088CC;
-        }
-        .back-button svg {
-            margin-right: 5px;
-        }
-        /* Стили для iframe */
-        .iframe-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            display: none; /* Скрыт по умолчанию */
-        }
-        .iframe-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
     </style>
 </head>
 <body>
@@ -175,32 +133,19 @@
 
         <div class="button-wrapper">
             <p class="heading">Заказать услугу на KWORK:</p>
-            <a class="button" href="https://kwork.ru/user/joehacker" onclick="openIframe(event, 'https://kwork.ru/user/joehacker')">KWORK</a>
+            <a class="button" href="https://kwork.ru/user/joehacker">KWORK</a>
         </div>
         
+        <!-- Перемещенная секция для Хабр под KWORK -->
         <div class="button-wrapper">
             <p class="heading">Заказать услугу на Хабр:</p>
-            <a class="button" href="https://freelance.habr.com/freelancers/joehacker" onclick="openIframe(event, 'https://freelance.habr.com/freelancers/joehacker')">ХАБР</a>
+            <a class="button" href="https://freelance.habr.com/freelancers/joehacker">ХАБР</a>
         </div>
 
         <div class="button-wrapper">
             <p class="heading">Посмотреть код Джо на GitHub:</p>
-            <a class="button" href="https://github.com/joeruhacker" onclick="openIframe(event, 'https://github.com/joeruhacker')">GITHUB ДЖО</a>
+            <a class="button" href="https://github.com/joeruhacker">GITHUB ДЖО</a>
         </div>
-    </div>
-
-    <!-- Кнопка "Назад" -->
-    <button class="back-button" onclick="closeIframe()">
-        <!-- Иконка стрелки назад (SVG) -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 0 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 7.5H14.5A.5.5 0 0 1 15 8z"/>
-        </svg>
-        Назад
-    </button>
-
-    <!-- Контейнер для iframe -->
-    <div class="iframe-container" id="iframe-container">
-        <iframe src="" id="external-iframe"></iframe>
     </div>
 
     <script>
@@ -301,22 +246,6 @@
                 drops[i] = drops[i] || 0;
             }
         });
-
-        // Функции для открытия и закрытия iframe
-        function openIframe(event, url) {
-            event.preventDefault(); // Предотвращаем стандартное поведение ссылки
-            document.getElementById('external-iframe').src = url;
-            document.getElementById('iframe-container').style.display = 'block';
-            document.querySelector('.content').style.display = 'none';
-            document.querySelector('.back-button').style.display = 'flex';
-        }
-
-        function closeIframe() {
-            document.getElementById('external-iframe').src = '';
-            document.getElementById('iframe-container').style.display = 'none';
-            document.querySelector('.content').style.display = 'block';
-            document.querySelector('.back-button').style.display = 'none';
-        }
     </script>
 </body>
 </html>
