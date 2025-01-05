@@ -1,279 +1,251 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Джо Хакер - Программист Матрицы</title>
-  <!-- Подключение шрифта Roboto Mono -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap"
-    rel="stylesheet"
-  />
-  <style>
-    /************** АНИМАЦИИ **************/
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    @keyframes pulse {
-      0%,
-      100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.05);
-      }
-    }
-    @keyframes neon {
-      0%,
-      100% {
-        text-shadow:
-          0 0 5px #2AABEE,
-          0 0 10px #2AABEE,
-          0 0 15px #2AABEE,
-          0 0 20px #0088CC,
-          0 0 30px #0088CC,
-          0 0 40px #0088CC,
-          0 0 55px #0088CC;
-      }
-      50% {
-        text-shadow:
-          0 0 10px #2AABEE,
-          0 0 20px #2AABEE,
-          0 0 30px #2AABEE,
-          0 0 40px #0088CC,
-          0 0 50px #0088CC,
-          0 0 75px #0088CC,
-          0 0 100px #0088CC;
-      }
-    }
-
-    /************** СБРОС И ОСНОВНЫЕ СТИЛИ **************/
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden; /* Запрещаем прокрутку */
-      box-sizing: border-box;
-    }
-    body {
-      font-family: "Roboto Mono", monospace;
-      background: radial-gradient(circle, #2AABEE, #000);
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      animation: fadeIn 1s ease-out;
-      position: relative; /* чтобы .matrix могла быть position: absolute/fixed */
-    }
-
-    /************** БЛОК С КОНТЕНТОМ **************/
-    .content {
-      text-align: center;
-      max-width: 600px;
-      width: 100%;
-      /* небольшие отступы, чтобы контент не прилипал к краю */
-      padding: 10px;
-      animation: fadeIn 1.5s ease-out;
-      z-index: 1; /* Контент выше анимации фона */
-    }
-
-    h1 {
-      font-size: 36px; /* Уменьшенный шрифт */
-      text-transform: uppercase;
-      letter-spacing: 4px;
-      margin-bottom: 20px;
-      color: #2AABEE;
-      animation: neon 2s infinite;
-    }
-
-    p.heading {
-      font-size: 14px; /* Уменьшенный шрифт */
-      margin: 12px 0 5px 0; /* Уменьшим отступы */
-      line-height: 1.4;
-      color: #2AABEE;
-      animation: fadeIn 1s forwards;
-    }
-
-    .button-wrapper {
-      margin-bottom: 15px; /* Уменьшенный отступ между блоками */
-    }
-
-    .button {
-      font-family: "Roboto Mono", monospace;
-      display: inline-block;
-      background-color: #2AABEE;
-      color: #ffffff;
-      text-decoration: none;
-      padding: 8px 16px; /* Уменьшенный паддинг */
-      border-radius: 5px;
-      transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-      letter-spacing: 1px;
-      animation: pulse 1.5s infinite;
-      box-shadow: 0 0 10px #2AABEE, 0 0 20px #2AABEE, 0 0 30px #2AABEE;
-      font-size: 12px; /* Уменьшенный шрифт */
-    }
-    .button:hover {
-      background-color: #0088CC;
-      transform: scale(1.05);
-      box-shadow: 0 0 20px #0088CC, 0 0 30px #0088CC, 0 0 40px #0088CC;
-    }
-
-    /************** МАТРИЦА НА ФОНЕ **************/
-    .matrix {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      background: black;
-      opacity: 0.6; /* затемнённый фон */
-      overflow: hidden;
-    }
-    canvas {
-      display: block;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Джо Хакер - Программист Матрицы</title>
+    <!-- Подключение шрифта Roboto Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @keyframes neon {
+            0%, 100% { 
+                text-shadow: 
+                    0 0 5px #2AABEE, 
+                    0 0 10px #2AABEE, 
+                    0 0 15px #2AABEE, 
+                    0 0 20px #0088CC, 
+                    0 0 30px #0088CC, 
+                    0 0 40px #0088CC, 
+                    0 0 55px #0088CC; 
+            }
+            50% { 
+                text-shadow: 
+                    0 0 10px #2AABEE, 
+                    0 0 20px #2AABEE, 
+                    0 0 30px #2AABEE, 
+                    0 0 40px #0088CC, 
+                    0 0 50px #0088CC, 
+                    0 0 75px #0088CC, 
+                    0 0 100px #0088CC; 
+            }
+        }
+        body {
+            font-family: 'Roboto Mono', monospace; /* Применение Roboto Mono ко всему телу */
+            background: radial-gradient(circle, #2AABEE, #000000);
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh; /* Используем min-height вместо height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            animation: fadeIn 1s ease-out;
+            overflow-y: auto; /* Разрешаем вертикальную прокрутку */
+            /* overflow: hidden; */ /* Удалено для предотвращения скрытия контента */
+        }
+        .content {
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            padding: 20px;
+            animation: fadeIn 1.5s ease-out;
+            z-index: 1; /* Обеспечивает, что контент выше анимации */
+        }
+        h1 {
+            font-family: 'Roboto Mono', monospace; /* Применение Roboto Mono */
+            font-size: 48px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 30px;
+            color: #2AABEE;
+            animation: neon 2s infinite;
+        }
+        p.heading {
+            font-family: 'Roboto Mono', monospace; /* Применение Roboto Mono */
+            font-size: 18px; /* Уменьшенный размер шрифта */
+            margin: 20px 0 10px 0;
+            line-height: 1.4;
+            color: #2AABEE;
+            animation: fadeIn 1s forwards;
+        }
+        .button-wrapper {
+            margin-bottom: 20px;
+        }
+        .button {
+            font-family: 'Roboto Mono', monospace; /* Применение Roboto Mono */
+            display: inline-block;
+            background-color: #2AABEE;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            letter-spacing: 1px;
+            animation: pulse 1.5s infinite;
+            box-shadow: 0 0 10px #2AABEE, 0 0 20px #2AABEE, 0 0 30px #2AABEE;
+            font-size: 14px; /* Уменьшенный размер шрифта */
+        }
+        .button:hover {
+            background-color: #0088CC;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #0088CC, 0 0 30px #0088CC, 0 0 40px #0088CC;
+        }
+        .matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: black;
+            opacity: 0.6; /* Сниженная яркость фона */
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-  <!-- Фоновая «Матрица» -->
-  <div class="matrix"></div>
+    <div class="matrix"></div>
+    <div class="content">
+        <h1>Джо Хакер</h1>
+        
+        <div class="button-wrapper">
+            <p class="heading">Связаться с Джо:</p>
+            <a class="button" href="https://t.me/joe_hacker">ТЕЛЕГРАМ</a>
+        </div>
 
-  <!-- Контент -->
-  <div class="content">
-    <h1>Джо Хакер</h1>
+        <div class="button-wrapper">
+            <p class="heading">Канал Джо с новостями мира хакинга:</p>
+            <a class="button" href="https://t.me/joe_hacker_canal">КАНАЛ В ТЕЛЕГРАМЕ</a>
+        </div>
 
-    <div class="button-wrapper">
-      <p class="heading">Связаться с Джо:</p>
-      <a class="button" href="https://t.me/joe_hacker">ТЕЛЕГРАМ</a>
+        <div class="button-wrapper">
+            <p class="heading">Заказать услугу на KWORK:</p>
+            <a class="button" href="https://kwork.ru/user/joehacker">KWORK</a>
+        </div>
+        
+        <!-- Перемещенная секция для Хабр под KWORK -->
+        <div class="button-wrapper">
+            <p class="heading">Заказать услугу на Хабр:</p>
+            <a class="button" href="https://freelance.habr.com/freelancers/joehacker">ХАБР</a>
+        </div>
+
+        <div class="button-wrapper">
+            <p class="heading">Посмотреть код Джо на GitHub:</p>
+            <a class="button" href="https://github.com/joeruhacker">GITHUB ДЖО</a>
+        </div>
     </div>
 
-    <div class="button-wrapper">
-      <p class="heading">Канал Джо с новостями мира хакинга:</p>
-      <a class="button" href="https://t.me/joe_hacker_canal">КАНАЛ В ТЕЛЕГРАМЕ</a>
-    </div>
+    <script>
+        // Matrix Effect с использованием Python-кода
+        const canvas = document.createElement('canvas');
+        const matrixContainer = document.querySelector('.matrix');
+        matrixContainer.appendChild(canvas);
+        const ctx = canvas.getContext('2d');
 
-    <div class="button-wrapper">
-      <p class="heading">Заказать услугу на KWORK:</p>
-      <a class="button" href="https://kwork.ru/user/joehacker">KWORK</a>
-    </div>
+        // Установка размеров канваса
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
 
-    <div class="button-wrapper">
-      <p class="heading">Заказать услугу на Хабр:</p>
-      <a class="button" href="https://freelance.habr.com/freelancers/joehacker">ХАБР</a>
-    </div>
+        // Размер шрифта и расчет количества столбцов
+        const fontSize = 12; // Уменьшенный размер шрифта
+        const columns = Math.floor(width / fontSize);
 
-    <div class="button-wrapper">
-      <p class="heading">Посмотреть код Джо на GitHub:</p>
-      <a class="button" href="https://github.com/joeruhacker">GITHUB ДЖО</a>
-    </div>
-  </div>
+        // Массив для отслеживания позиций каждого столбца
+        const drops = Array(columns).fill(0);
 
-  <script>
-    // Создаём canvas для эффекта "Матрицы"
-    const canvas = document.createElement("canvas");
-    const matrixContainer = document.querySelector(".matrix");
-    matrixContainer.appendChild(canvas);
-    const ctx = canvas.getContext("2d");
+        // Список строк Python-кода
+        const codeLines = [
+            "def greet(name):",
+            "    print(f'Hello, {name}!')",
+            "",
+            "class Hacker:",
+            "    def __init__(self, name):",
+            "        self.name = name",
+            "",
+            "    def hack(self):",
+            "        print(f'{self.name} is hacking...')",
+            "",
+            "if __name__ == '__main__':",
+            "    joe = Hacker('Джо')",
+            "    joe.greet('Мир')",
+            "    joe.hack()",
+            "",
+            "# Создание экземпляра класса",
+            "user = Hacker('User')",
+            "user.greet('Developer')",
+            "user.hack()"
+        ];
 
-    // Устанавливаем размер canvas
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
-
-    // Размер шрифта и расчёт количества столбцов
-    const fontSize = 12;
-    let columns = Math.floor(width / fontSize);
-
-    // Массив для отслеживания "капель" в каждом столбце
-    const drops = Array(columns).fill(0);
-
-    // Список строк Python-кода
-    const codeLines = [
-      "def greet(name):",
-      "    print(f'Hello, {name}!')",
-      "",
-      "class Hacker:",
-      "    def __init__(self, name):",
-      "        self.name = name",
-      "",
-      "    def hack(self):",
-      "        print(f'{self.name} is hacking...')",
-      "",
-      "if __name__ == '__main__':",
-      "    joe = Hacker('Джо')",
-      "    joe.greet('Мир')",
-      "    joe.hack()",
-      "",
-      "# Создание экземпляра класса",
-      "user = Hacker('User')",
-      "user.greet('Developer')",
-      "user.hack()",
-    ];
-
-    // Возвращаем случайную строку кода
-    function getRandomCodeLine() {
-      return codeLines[Math.floor(Math.random() * codeLines.length)];
-    }
-
-    // Основная функция рисования
-    function draw() {
-      // "Затемняем" предыдущий кадр для шлейфа
-      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-      ctx.fillRect(0, 0, width, height);
-
-      // Цвет символов
-      ctx.fillStyle = "#2AABEE";
-      ctx.font = fontSize + "px monospace";
-
-      // Проходим по всем столбцам
-      for (let i = 0; i < drops.length; i++) {
-        const codeLine = getRandomCodeLine();
-        const charIndex = drops[i] % codeLine.length;
-        const text = codeLine.charAt(charIndex) || " ";
-
-        const x = i * fontSize;
-        const y = drops[i] * fontSize;
-
-        ctx.fillText(text, x, y);
-
-        // Сброс, когда столбец ушел за нижний край
-        if (y > height && Math.random() > 0.999) {
-          drops[i] = 0;
-        } else {
-          drops[i]++;
+        // Функция для случайного выбора строки кода
+        function getRandomCodeLine() {
+            return codeLines[Math.floor(Math.random() * codeLines.length)];
         }
-      }
-    }
 
-    // Запуск анимации
-    function animate() {
-      draw();
-      requestAnimationFrame(animate);
-    }
-    animate();
+        // Функция для рисования
+        function draw() {
+            // Полупрозрачная заливка для эффекта затухания
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, width, height);
 
-    // При изменении размера окна пересчитываем всё
-    window.addEventListener("resize", () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-      columns = Math.floor(width / fontSize);
+            // Синий цвет для символов
+            ctx.fillStyle = '#2AABEE'; // Синий цвет, как в примере
+            ctx.font = ${fontSize}px monospace;
 
-      drops.length = columns;
-      for (let i = 0; i < columns; i++) {
-        // Если в drops[i] уже что-то есть — оставляем
-        // иначе инициализируем нулем
-        drops[i] = drops[i] || 0;
-      }
-    });
-  </script>
+            // Перебор всех столбцов
+            for (let i = 0; i < drops.length; i++) {
+                // Выбор случайной строки кода
+                const codeLine = getRandomCodeLine();
+                const charIndex = drops[i] % codeLine.length;
+                const text = codeLine.charAt(charIndex) || ' ';
+                
+                // Позиция символа
+                const x = i * fontSize;
+                const y = drops[i] * fontSize;
+
+                // Рисование символа
+                ctx.fillText(text, x, y);
+
+                // Обновление позиции
+                if (y > height && Math.random() > 0.999) { // Уменьшена скорость сброса
+                    drops[i] = 0;
+                } else {
+                    drops[i]++;
+                }
+            }
+        }
+
+        // Использование requestAnimationFrame для плавной анимации
+        function animate() {
+            draw();
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        // Обновление размеров канваса при изменении размера окна
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            // Пересчет количества столбцов
+            const newColumns = Math.floor(width / fontSize);
+            drops.length = newColumns;
+            for (let i = 0; i < newColumns; i++) {
+                drops[i] = drops[i] || 0;
+            }
+        });
+    </script>
 </body>
 </html>
