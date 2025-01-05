@@ -90,7 +90,7 @@
             border-radius: 5px;
             transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
             letter-spacing: 1px;
-            animation: pulse 1.5s infinite;
+            animation: pulse 3s infinite; /* Увеличена длительность анимации с 1.5s до 3s */
             box-shadow: 0 0 10px #2AABEE, 0 0 20px #2AABEE, 0 0 30px #2AABEE;
             font-size: 14px;
         }
@@ -165,6 +165,10 @@
         // Массив для отслеживания позиций каждого столбца
         const drops = Array(columns).fill(0);
 
+        // Добавляем массив задержек для каждого столбца
+        const dropsDelay = Array(columns).fill(0);
+        const dropInterval = 2; // Количество кадров между обновлениями
+
         // Список строк Python-кода
         const codeLines = [
             "def greet(name):",
@@ -205,6 +209,13 @@
 
             // Перебор всех столбцов
             for (let i = 0; i < drops.length; i++) {
+                // Обработка задержки для текущего столбца
+                if (dropsDelay[i] < dropInterval) {
+                    dropsDelay[i]++;
+                    continue; // Пропустить обновление этого столбца на этом кадре
+                }
+                dropsDelay[i] = 0; // Сбросить задержку
+
                 // Выбор случайной строки кода
                 const codeLine = getRandomCodeLine();
                 const charIndex = drops[i] % codeLine.length;
@@ -241,8 +252,10 @@
             // Пересчет количества столбцов
             const newColumns = Math.floor(width / fontSize);
             drops.length = newColumns;
+            dropsDelay.length = newColumns;
             for (let i = 0; i < newColumns; i++) {
                 drops[i] = drops[i] || 0;
+                dropsDelay[i] = dropsDelay[i] || 0;
             }
         });
     </script>
