@@ -38,19 +38,18 @@
             }
         }
         body {
-            font-family: 'Roboto Mono', monospace; /* Применение Roboto Mono ко всему телу */
+            font-family: 'Roboto Mono', monospace;
             background: radial-gradient(circle, #2AABEE, #000000);
             color: #ffffff;
             margin: 0;
             padding: 0;
-            min-height: 100vh; /* Используем min-height вместо height */
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             animation: fadeIn 1s ease-out;
-            overflow-y: auto; /* Разрешаем вертикальную прокрутку */
-            /* overflow: hidden; */ /* Удалено для предотвращения скрытия контента */
+            overflow-y: auto;
         }
         .content {
             text-align: center;
@@ -58,10 +57,10 @@
             width: 100%;
             padding: 20px;
             animation: fadeIn 1.5s ease-out;
-            z-index: 1; /* Обеспечивает, что контент выше анимации */
+            z-index: 1;
         }
         h1 {
-            font-family: 'Roboto Mono', monospace; /* Применение Roboto Mono */
+            font-family: 'Roboto Mono', monospace;
             font-size: 48px;
             text-transform: uppercase;
             letter-spacing: 4px;
@@ -70,8 +69,8 @@
             animation: neon 2s infinite;
         }
         p.heading {
-            font-family: 'Roboto Mono', monospace; /* Применение Roboto Mono */
-            font-size: 18px; /* Уменьшенный размер шрифта */
+            font-family: 'Roboto Mono', monospace;
+            font-size: 18px;
             margin: 20px 0 10px 0;
             line-height: 1.4;
             color: #2AABEE;
@@ -81,7 +80,7 @@
             margin-bottom: 20px;
         }
         .button {
-            font-family: 'Roboto Mono', monospace; /* Применение Roboto Mono */
+            font-family: 'Roboto Mono', monospace;
             display: inline-block;
             background-color: #2AABEE;
             color: #ffffff;
@@ -93,7 +92,7 @@
             letter-spacing: 1px;
             animation: pulse 1.5s infinite;
             box-shadow: 0 0 10px #2AABEE, 0 0 20px #2AABEE, 0 0 30px #2AABEE;
-            font-size: 14px; /* Уменьшенный размер шрифта */
+            font-size: 14px;
         }
         .button:hover {
             background-color: #0088CC;
@@ -108,7 +107,7 @@
             height: 100%;
             z-index: 0;
             background: black;
-            opacity: 0.6; /* Сниженная яркость фона */
+            opacity: 0.6;
             overflow: hidden;
         }
         canvas {
@@ -149,7 +148,7 @@
     </div>
 
     <script>
-        // Matrix Effect с использованием Python-кода
+        // Эффект "Матрицы" с использованием Python-кода
         const canvas = document.createElement('canvas');
         const matrixContainer = document.querySelector('.matrix');
         matrixContainer.appendChild(canvas);
@@ -202,7 +201,7 @@
 
             // Синий цвет для символов
             ctx.fillStyle = '#2AABEE'; // Синий цвет, как в примере
-            ctx.font = ${fontSize}px monospace;
+            ctx.font = `${fontSize}px 'Roboto Mono', monospace`; // Исправленная строка
 
             // Перебор всех столбцов
             for (let i = 0; i < drops.length; i++) {
@@ -219,7 +218,7 @@
                 ctx.fillText(text, x, y);
 
                 // Обновление позиции
-                if (y > height && Math.random() > 0.999) { // Уменьшена скорость сброса
+                if (y > height && Math.random() > 0.975) { // Настроенная скорость сброса
                     drops[i] = 0;
                 } else {
                     drops[i]++;
