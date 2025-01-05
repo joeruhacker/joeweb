@@ -2,16 +2,11 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <!-- Запрещаем масштабирование и горизонтальную прокрутку, делаем “как приложение” -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Джо Хакер - Программист Матрицы</title>
-
     <!-- Подключение шрифта Roboto Mono -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-
     <style>
-        /* Анимации */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -42,37 +37,32 @@
                     0 0 100px #0088CC; 
             }
         }
-
-        /* Глобальные стили */
         html, body {
             margin: 0;
             padding: 0;
+            height: 100vh; /* Высота на весь экран */
+            overflow: hidden; /* Отключаем прокрутку */
+        }
+        body {
             font-family: 'Roboto Mono', monospace;
-            overflow-x: hidden; /* Запрещаем горизонтальную прокрутку */
             background: radial-gradient(circle, #2AABEE, #000000);
             color: #ffffff;
-            height: 100vh; 
-        }
-
-        /* Контейнер основного контента (главная страница) */
-        .content {
-            min-height: 100vh; 
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
+            animation: fadeIn 1s ease-out;
+        }
+        .content {
             text-align: center;
             max-width: 600px;
             width: 100%;
             padding: 20px;
-            margin: 0 auto;
             animation: fadeIn 1.5s ease-out;
-            z-index: 1; 
-            box-sizing: border-box;
+            z-index: 1; /* Контент выше анимации */
         }
-
-        /* Заголовок */
         h1 {
+            font-family: 'Roboto Mono', monospace;
             font-size: 48px;
             text-transform: uppercase;
             letter-spacing: 4px;
@@ -80,23 +70,19 @@
             color: #2AABEE;
             animation: neon 2s infinite;
         }
-
-        /* Подзаголовки */
         p.heading {
+            font-family: 'Roboto Mono', monospace;
             font-size: 18px;
             margin: 20px 0 10px 0;
             line-height: 1.4;
             color: #2AABEE;
             animation: fadeIn 1s forwards;
         }
-
-        /* Обёртка под кнопки */
         .button-wrapper {
             margin-bottom: 20px;
         }
-
-        /* Общий стиль кнопок */
         .button {
+            font-family: 'Roboto Mono', monospace;
             display: inline-block;
             background-color: #2AABEE;
             color: #ffffff;
@@ -109,17 +95,12 @@
             animation: pulse 1.5s infinite;
             box-shadow: 0 0 10px #2AABEE, 0 0 20px #2AABEE, 0 0 30px #2AABEE;
             font-size: 14px;
-            cursor: pointer;
         }
-
-        /* Ховер для кнопок */
         .button:hover {
             background-color: #0088CC;
             transform: scale(1.05);
             box-shadow: 0 0 20px #0088CC, 0 0 30px #0088CC, 0 0 40px #0088CC;
         }
-
-        /* Фон для матрицы */
         .matrix {
             position: fixed;
             top: 0;
@@ -128,111 +109,47 @@
             height: 100%;
             z-index: 0;
             background: black;
-            opacity: 0.6; 
+            opacity: 0.6; /* затемнённый фон */
             overflow: hidden;
         }
         canvas {
             display: block;
         }
-
-        /* Контейнер для “вложенного окна” (iframe) */
-        .iframe-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #000; /* Можно чуть затемнить */
-            display: none;         /* По умолчанию скрыто */
-            flex-direction: column;
-            z-index: 2;           /* Выше всего */
-        }
-
-        /* Верхняя панель с кнопкой «Назад» */
-        .iframe-header {
-            height: 50px;
-            background-color: #2AABEE;
-            display: flex;
-            align-items: center;
-            padding: 0 10px;
-        }
-        .back-button {
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 24px;
-            cursor: pointer;
-        }
-        .header-title {
-            flex: 1;
-            text-align: center;
-            font-size: 16px;
-            color: #fff;
-            font-weight: bold;
-        }
-
-        /* Сама область под iframe */
-        .iframe-content {
-            flex: 1;
-            overflow: auto;
-        }
-        .iframe-content iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: block;
-        }
     </style>
 </head>
 <body>
-    <!-- Фон “Матрицы” -->
     <div class="matrix"></div>
-
-    <!-- Основной контент (главная страница) -->
     <div class="content">
         <h1>Джо Хакер</h1>
-
+        
         <div class="button-wrapper">
             <p class="heading">Связаться с Джо:</p>
-            <a class="button" href="https://t.me/joe_hacker" target="_blank">ТЕЛЕГРАМ</a>
+            <a class="button" href="https://t.me/joe_hacker">ТЕЛЕГРАМ</a>
         </div>
 
         <div class="button-wrapper">
             <p class="heading">Канал Джо с новостями мира хакинга:</p>
-            <a class="button" href="https://t.me/joe_hacker_canal" target="_blank">КАНАЛ В ТЕЛЕГРАМЕ</a>
+            <a class="button" href="https://t.me/joe_hacker_canal">КАНАЛ В ТЕЛЕГРАМЕ</a>
         </div>
 
         <div class="button-wrapper">
             <p class="heading">Заказать услугу на KWORK:</p>
-            <!-- Вместо прямого href вызываем функцию openIframe -->
-            <div class="button" onclick="openIframe('https://kwork.ru/user/joehacker', 'KWORK')">KWORK</div>
+            <a class="button" href="https://kwork.ru/user/joehacker">KWORK</a>
         </div>
-
+        
         <div class="button-wrapper">
             <p class="heading">Заказать услугу на Хабр:</p>
-            <div class="button" onclick="openIframe('https://freelance.habr.com/freelancers/joehacker', 'ХАБР')">ХАБР</div>
+            <a class="button" href="https://freelance.habr.com/freelancers/joehacker">ХАБР</a>
         </div>
 
         <div class="button-wrapper">
             <p class="heading">Посмотреть код Джо на GitHub:</p>
-            <div class="button" onclick="openIframe('https://github.com/joeruhacker', 'GITHUB')">GITHUB ДЖО</div>
-        </div>
-    </div>
-
-    <!-- “Вложенное окно” с iframe и кнопкой “Назад” -->
-    <div class="iframe-container" id="iframeContainer">
-        <div class="iframe-header">
-            <!-- Cтрелка “назад” -->
-            <button class="back-button" onclick="closeIframe()">←</button>
-            <div class="header-title" id="iframeTitle"></div>
-        </div>
-        <div class="iframe-content">
-            <iframe id="externalFrame"></iframe>
+            <a class="button" href="https://github.com/joeruhacker">GITHUB ДЖО</a>
         </div>
     </div>
 
     <script>
-        // Matrix Effect (как у вас был):
+        // Matrix Effect с использованием Python-кода
         const canvas = document.createElement('canvas');
         const matrixContainer = document.querySelector('.matrix');
         matrixContainer.appendChild(canvas);
@@ -240,10 +157,15 @@
 
         let width = canvas.width = window.innerWidth;
         let height = canvas.height = window.innerHeight;
-        const fontSize = 12;
-        const columns = Math.floor(width / fontSize);
+
+        // Размер шрифта и расчет количества столбцов
+        const fontSize = 12; 
+        let columns = Math.floor(width / fontSize);
+
+        // Массив для отслеживания позиций каждого столбца
         const drops = Array(columns).fill(0);
 
+        // Список строк Python-кода
         const codeLines = [
             "def greet(name):",
             "    print(f'Hello, {name}!')",
@@ -266,17 +188,22 @@
             "user.hack()"
         ];
 
+        // Случайная строка кода
         function getRandomCodeLine() {
             return codeLines[Math.floor(Math.random() * codeLines.length)];
         }
 
+        // Рисуем
         function draw() {
+            // Полупрозрачная заливка для эффекта затухания
             ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
             ctx.fillRect(0, 0, width, height);
 
+            // Цвет символов
             ctx.fillStyle = '#2AABEE';
-            ctx.font = fontSize + "px monospace";
+            ctx.font = fontSize + 'px monospace';
 
+            // Перебираем все столбцы
             for (let i = 0; i < drops.length; i++) {
                 const codeLine = getRandomCodeLine();
                 const charIndex = drops[i] % codeLine.length;
@@ -287,6 +214,7 @@
 
                 ctx.fillText(text, x, y);
 
+                // Сброс столбца
                 if (y > height && Math.random() > 0.999) {
                     drops[i] = 0;
                 } else {
@@ -295,6 +223,7 @@
             }
         }
 
+        // Анимация
         function animate() {
             draw();
             requestAnimationFrame(animate);
@@ -302,40 +231,16 @@
 
         animate();
 
+        // При изменении размера окна
         window.addEventListener('resize', () => {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
-            const newColumns = Math.floor(width / fontSize);
-            drops.length = newColumns;
-            for (let i = 0; i < newColumns; i++) {
+            columns = Math.floor(width / fontSize);
+            drops.length = columns;
+            for (let i = 0; i < columns; i++) {
                 drops[i] = drops[i] || 0;
             }
         });
-
-        // Функции для открытия/закрытия iframe
-        function openIframe(url, title) {
-            // Прячем контент, показываем iframe
-            document.querySelector('.content').style.display = 'none';
-            const iframeContainer = document.getElementById('iframeContainer');
-            iframeContainer.style.display = 'flex';
-
-            // Заголовок сверху (чтобы понимали, куда перешли)
-            document.getElementById('iframeTitle').textContent = title || '';
-
-            // Подставляем ссылку в iframe
-            const frame = document.getElementById('externalFrame');
-            frame.src = url;
-        }
-
-        function closeIframe() {
-            // Прячем iframe и показываем контент обратно
-            const iframeContainer = document.getElementById('iframeContainer');
-            iframeContainer.style.display = 'none';
-            document.querySelector('.content').style.display = 'flex';
-
-            // Очищаем src, если нужно
-            document.getElementById('externalFrame').src = '';
-        }
     </script>
 </body>
 </html>
